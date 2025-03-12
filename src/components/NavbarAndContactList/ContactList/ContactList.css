@@ -5,6 +5,7 @@
     border-radius: 3px;
     background-color: #fff;
     border: 1px solid #d7dcdf;
+    overflow-y: scroll;
 }
 
 .contact-list p,
