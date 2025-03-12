@@ -21,8 +21,8 @@ const ContactList = () => {
                 <i className='fa-solid fa-user'></i>
               </div>
             </td>
-            <td><h2>John</h2></td>
-            <td><h2>Wan</h2></td>
+            <td><h2>Puja</h2></td>
+            <td><h2>Rokade</h2></td>
             <td><h2>3847281928</h2></td>
             <td>
               <div>

@@ -8,7 +8,7 @@ const Form = () => {
   return (
     <form className='form'>
       <div className='add-new-img'>
-        <img src={addnewImage}></img>
+        <img src={addnewImage} alt='VERTICLE-IMG'></img>
       </div>
       <div className='input-text'>
         <input
@@ -21,7 +21,7 @@ const Form = () => {
       <div className='input-tel'>
         <input
           type='text'
-          placeholder='7854809325' />
+          placeholder='Mobile-Number' />
       </div>
       <Button name='Add' />
     </form>

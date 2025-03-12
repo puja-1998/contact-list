@@ -15,6 +15,7 @@
 
 .contact-list .fa-solid {
     margin-right: 15px;
+    cursor: pointer;
 }
 
 .contact-list table {

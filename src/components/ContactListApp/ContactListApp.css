@@ -13,6 +13,7 @@ body {
     align-items: center;
     font-family: 'Poppins', sans-serif;
     letter-spacing: 0.5px;
+   
 }
 
 p,
@@ -31,4 +32,5 @@ p {
     margin: 0% auto;
     border-radius: 3px;
     background-color: #f7f7f7;
+   
 }
