@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import './ContactList.css';
-import ContactData from './ContactData';
+import React from 'react';
+import FavContactData from './FavContactData';
+import { useState, useEffect } from 'react';
 
-const ContactList = () => {
-
-  const [contacts, setContacts] = useState([])
+function FavContactList() {
+  const [favContacts, setFavContacts] = useState([])
 
   useEffect(()=>{
     const fetchContacts = async () =>{
-      const res = await fetch("https://contact-list-31423-default-rtdb.asia-southeast1.firebasedatabase.app/contact-list.json")
+      const res = await fetch("https://contact-list-31423-default-rtdb.asia-southeast1.firebasedatabase.app/fav-contact-list.json")
       const data = await res.json();
 
       const contactsData = [];
@@ -21,16 +20,16 @@ const ContactList = () => {
           tel: data[key].tel
         });
       }
-      setContacts(contactsData);
+      setFavContacts(contactsData);
       
     }
       fetchContacts();
-  }, [contacts]); 
+  }, [favContacts]); 
 
   return (
-    <div className='contact-list'>
+    <div className='fav-contact-list'>
       {
-        contacts.length > 0 ? (
+        favContacts.length > 0 ? (
           <table>
           <thead>
             <tr>
@@ -38,10 +37,9 @@ const ContactList = () => {
               <th><p>Name</p></th>
               <th><p>Surname</p></th>
               <th><p>Mobile</p></th>
-              <th><p>Actions</p></th>
             </tr>
           </thead>
-          <ContactData contacts={contacts}/>
+          <FavContactData favContacts={favContacts}/>
         </table>
         ):
         (
@@ -53,4 +51,4 @@ const ContactList = () => {
   )
 }
 
-export default ContactList;
+export default FavContactList

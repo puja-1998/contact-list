@@ -3,7 +3,8 @@ import "./Form.css";
 import addnewImage from "../../../assets/add-new.svg";
 import Button from '../../UI/Button.js';
 import { useDispatch, useSelector } from "react-redux";
-import { contactListActions } from "../../../store/contact-slice.js"
+import { contactListActions } from "../../../store/contact-slice.js";
+import { addContact } from '../../../store/contact-actions.js';
 
 const Form = () => {
 
@@ -25,17 +26,28 @@ const Form = () => {
 
       setUserData({
         name: existingContact?.name || "",
-        surname: "",
-        tel: ""
-      })
+        surname: existingContact?.surname || "",
+        tel:  existingContact?.tel || ""
+      });
     }
-  }, []);
+    fetchExistingContact();
+  }, [existingContactKey]);
 
 //form submit
   const submitHandler = (e)=>{
     e.preventDefault();
     
-    dispatch(contactListActions.addContact(userData))
+    if(existingContactKey){
+      dispatch(contactListActions.updateContact({
+        key: existingContactKey,
+        name: userData.name,
+        surname: userData.surname,
+        tel: userData.tel
+      }));
+    }
+    else{
+      dispatch(addContact(userData))
+    };
 
     setUserData({
       name: "",
@@ -48,13 +60,13 @@ const Form = () => {
 const inputHandler =(e)=>{
   const {name, value} = e.target;
 setUserData((preValue) =>{
-  return{
+  return {
     ...preValue,
     [name]: value
-  };
-});
-
+  }
+})
 };
+
   return (
     <form className='form' onSubmit={submitHandler}>
       <div className='add-new-img'>
@@ -66,13 +78,17 @@ setUserData((preValue) =>{
           placeholder='name' 
           name= 'name'
           value={userData.name}
-          onChange={inputHandler}/>
+          onChange={inputHandler}
+          required
+          pattern='[A-Za-z]+'/>
         <input
           type='text'
           placeholder='surname' 
           name= 'surname'
           value={userData.surname}
-          onChange={inputHandler}/>
+          onChange={inputHandler}
+          required
+          pattern='[A-Za-z]+'/>
       </div>
       <div className='input-tel'>
         <input
@@ -80,7 +96,11 @@ setUserData((preValue) =>{
           placeholder='Mobile-Number' 
           name= 'tel'
           value={userData.tel}
-          onChange={inputHandler}/>
+          onChange={inputHandler}
+          required
+          pattern='[1-9]\d*$'
+          maxLength='10'
+          minLength='10'/>
       </div>
       <Button name='Add' />
     </form>

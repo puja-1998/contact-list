@@ -6,41 +6,37 @@ const initialState = {
         name: "",
         surname: "",
         tel: ""
-    }
+    },
+    totalContacts: 0
 };
 
 const contactSlice = createSlice({
     name: "contactList",
     initialState,
     reducers: {
-        addContact: (state, action) =>{
-            const userData = action.payload;
-            fetch("https://contact-list-31423-default-rtdb.asia-southeast1.firebasedatabase.app/contact-list.json",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application.json",
-
-                },
-                body: JSON.stringify(userData)
-            }).catch(error =>{
-                console.log(error);
-                
-            })
-        },
-        deleteContact: (state, action) =>{
-            const deleteKey = action.payload;
-
-            fetch(`https://contact-list-31423-default-rtdb.asia-southeast1.firebasedatabase.app/contact-list/${deleteKey}.json`,
-                {
-                    method: "DELETE"
-                }).catch(error =>{
-                    console.log(error);
-                    
-                })
-        },
         setExistingContactKey: (state, action) =>{
             state.key = action.payload;
+        },
+        updateContact: (state, action) => {
+            const { key, name, surname, tel} = action.payload;
+            fetch(`https://contact-list-31423-default-rtdb.asia-southeast1.firebasedatabase.app/contact-list/${key}.json`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify({name,surname,tel})
+                }).catch(error => console.log(error));
+                state.key = "";
+        },
+         fetchTotalCntacts: (state, action) =>{
+            if(!action.payload){
+                state.totalContacts = 0  //handle null data set as 0
+            }
+            else{
+                state.totalContacts = Object.keys(action.payload).length
+            }
+           
         }
     }
 })
