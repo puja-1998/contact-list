@@ -1,6 +1,7 @@
 import React from 'react';
 import FavContactData from './FavContactData';
 import { useState, useEffect } from 'react';
+import './FavContactList.css';
 
 function FavContactList() {
   const [favContacts, setFavContacts] = useState([])

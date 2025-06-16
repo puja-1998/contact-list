@@ -1,11 +1,14 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { contactListActions } from '../../../store/contact-slice';
 import { deleteContact } from '../../../store/contact-actions';
-import { addToFavContact } from '../../../store/FavContactActions';
+import { addToFavContact, removeFromFavContact } from '../../../store/FavContactActions';
 
 const ContactData = (props) => {
 
+    // add in fav 
+    const [toggle, settoggle] = useState(false);
+    const contactKeys = useSelector(state => state.favContact.contactKeys)
     //delete contact data
     const dispatch = useDispatch();
     const deleteContactHandler = (key) =>{
@@ -19,7 +22,14 @@ const ContactData = (props) => {
 
     //Fav Contact List
     const addToFavContactHandler = (key) =>{
-        dispatch(addToFavContact(key));
+        if(toggle == true){
+            dispatch(removeFromFavContact(key, contactKeys));
+            settoggle(false);
+        }
+        else{
+            dispatch(addToFavContact(key));
+            settoggle(true);
+        }
     }
 
 
@@ -42,7 +52,7 @@ const ContactData = (props) => {
                     <div>
                         <i className='fa-solid fa-pen' onClick={() =>{updateContactHandler(contact.key)}} ></i>
                         <i className='fa-solid fa-trash' onClick={() =>{deleteContactHandler(contact.key)}}></i>
-                        <i className='fa-solid fa-heart' onClick={() =>{addToFavContactHandler(contact.key)}} ></i>
+                        <i className={`fa-solid fa-heart ${toggle ? 'red-heart' : ''}`} onClick={() =>{addToFavContactHandler(contact.key)}} ></i>
                     </div>
                     </td>
                 </tr>

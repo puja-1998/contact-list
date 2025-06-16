@@ -1,4 +1,4 @@
-.contact-list{
+.fav-contact-list{
     height: 100%;
     width: 100%;
     margin: 7px;
@@ -8,37 +8,37 @@
     overflow-y: scroll;
 }
 
-.contact-list p,
-.contact-list h2,
-.contact-list .fa-solid {
+.fav-contact-list p,
+.fav-contact-list h2,
+.fav-contact-list .fa-solid {
     color: #646464;
 }
 
-.contact-list .fa-solid {
+.fav-contact-list .fa-solid {
     margin-right: 15px;
     cursor: pointer;
 }
 
-.contact-list table {
+.fav-contact-list table {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
 }
 
-.contact-list th,
-.contact-list td{
+.fav-contact-list th,
+.fav-contact-list td{
     padding: 8px;
     border-bottom: 1px solid #ddd;
 }
 
-.contact-list .profile-img-box {
+.fav-contact-list .profile-img-box {
     margin-right: 0px;
     margin-left: 10px;
 }
 
 .fav-contact-list .profile-img-box{
     margin-right: 20px;
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
 .contact-list .red-heart{
